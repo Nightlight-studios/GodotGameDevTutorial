@@ -3,6 +3,10 @@ extends CanvasLayer
 onready var heart1 = $Heart1
 onready var heart2 = $Heart2
 onready var heart3 = $Heart3
+onready var coinLabel = $Label
+
+func _ready():
+	coinLabel.text = String("%04d" % 0);
 
 func setHearts(hearts = 0):
 	print(hearts)
@@ -42,10 +46,7 @@ func setHearts(hearts = 0):
 		heart2.set_frame(2)
 		heart3.set_frame(2)
 		return
+
+func setCoins(coins):
+	coinLabel.text = String("%04d" % coins);
 	
-
-
-	
-
-		
-

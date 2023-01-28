@@ -10,3 +10,8 @@ func _physics_process(delta):
 	
 	if(zoomX > 1):
 		camera.zoom = Vector2(zoomX, zoomY);
+	
+	
+	if(Input.is_action_pressed("ui_accept")):
+		var _ok = get_tree().change_scene("res://Assets/Scenes/StartMenu.tscn")
+	

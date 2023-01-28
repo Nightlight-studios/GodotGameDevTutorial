@@ -3,6 +3,8 @@ extends KinematicBody2D
 const Controls = preload("../Mechanics/Controls.gd");
 const Direction = preload("../Mechanics/Direction.gd")
 
+onready var animationPlayer = $AnimationPlayer
+
 # Movement constants
 const moveSpeed = 250;
 
@@ -34,6 +36,9 @@ const pattern = [
 	Direction.NONE, 
 ]
 
+func _ready():
+	animationPlayer.play("Move")
+
 func _physics_process(_delta):
 	
 	if !moving:
@@ -56,16 +61,16 @@ func _physics_process(_delta):
 	
 	match pattern[step]: 
 		Direction.UP:
-			motion.y = -moveSpeed;
+			motion.y = -lerp(motion.y,moveSpeed,.9)
 		
 		Direction.DOWN:
-			motion.y = moveSpeed;
+			motion.y = lerp(motion.y,moveSpeed,.9);
 			
 		Direction.LEFT:
-			motion.x = -moveSpeed;
+			motion.x = -lerp(motion.x,moveSpeed,.9);
 			
 		Direction.RIGHT:
-			motion.x = moveSpeed;
+			motion.x = lerp(motion.x,moveSpeed,.9);
 	
 	motion = move_and_slide(motion, Vector2(0,-1), false, 4, PI/4 ,false);
 
