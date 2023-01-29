@@ -10,7 +10,7 @@ config_version=4
 
 [application]
 
-config/name="GodotPracticess"
+config/name="TheLegendOfLumberJack"
 run/main_scene="res://Assets/Scenes/StartMenu.tscn"
 config/icon="res://icon.png"
 
@@ -21,6 +21,10 @@ window/size/height=720
 window/dpi/allow_hidpi=true
 window/stretch/mode="2d"
 window/stretch/aspect="keep"
+
+[global]
+
+theme=false
 
 [input]
 
