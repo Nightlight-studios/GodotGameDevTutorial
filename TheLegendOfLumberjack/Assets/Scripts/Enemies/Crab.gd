@@ -114,3 +114,6 @@ func check_damage():
 	for player in players:
 		player.take_damage(CRAB_IDLE_DAMAGE)
 
+## Take damage
+func take_damage(damage):
+	queue_free()

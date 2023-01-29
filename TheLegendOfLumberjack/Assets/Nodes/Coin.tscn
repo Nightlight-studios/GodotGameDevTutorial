@@ -4,7 +4,7 @@
 [ext_resource path="res://Assets/Scripts/Items/Coin.gd" type="Script" id=2]
 
 [sub_resource type="CircleShape2D" id=3]
-radius = 78.4092
+radius = 58.0
 
 [sub_resource type="Animation" id=1]
 resource_name = "Idle"
@@ -22,6 +22,18 @@ tracks/0/keys = {
 "update": 1,
 "values": [ 0, 1, 2, 3 ]
 }
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0, 0.1 ),
+"transitions": PoolRealArray( 1, 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ), Vector2( 1, -11 ) ]
+}
 
 [sub_resource type="Animation" id=2]
 length = 0.001
@@ -36,6 +48,30 @@ tracks/0/keys = {
 "transitions": PoolRealArray( 1 ),
 "update": 0,
 "values": [ 0 ]
+}
+tracks/1/type = "value"
+tracks/1/path = NodePath("Area2D/Sprite:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( 0, 1 ) ]
+}
+tracks/2/type = "value"
+tracks/2/path = NodePath("Area2D/Sprite:scale")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/keys = {
+"times": PoolRealArray( 0 ),
+"transitions": PoolRealArray( 1 ),
+"update": 0,
+"values": [ Vector2( -1, 1 ) ]
 }
 
 [node name="Coin" type="Node2D"]
@@ -53,6 +89,7 @@ anims/RESET = SubResource( 2 )
 
 [node name="Sprite" type="Sprite" parent="Area2D"]
 position = Vector2( 0, 1 )
+scale = Vector2( -1, 1 )
 texture = ExtResource( 1 )
 hframes = 4
 
