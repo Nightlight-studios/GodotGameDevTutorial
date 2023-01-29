@@ -2,7 +2,7 @@ name: "godot-ci export"
 on: push
 
 env:
-  GODOT_VERSION: 3.3.4
+  GODOT_VERSION: 3.4.5
   EXPORT_NAME: TheLegendOfLumberjack
   PROJECT_PATH: TheLegendOfLumberjack
   
@@ -11,7 +11,7 @@ jobs:
     name: Windows Export
     runs-on: ubuntu-20.04
     container:
-      image: barichello/godot-ci:3.3.4
+      image: barichello/godot-ci:3.4.5
     steps:
       - name: Checkout
         uses: actions/checkout@v2
