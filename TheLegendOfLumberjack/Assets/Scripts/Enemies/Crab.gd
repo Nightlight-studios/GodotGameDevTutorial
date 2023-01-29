@@ -1,7 +1,8 @@
 extends KinematicBody2D
 
-const Controls = preload("../Mechanics/Controls.gd")
-const Direction = preload("../Mechanics/Direction.gd")
+const Controls = preload("res://Assets/Scripts/Mechanics/Controls.gd")
+const Direction = preload("res://Assets/Scripts/Mechanics/Direction.gd")
+const Time = preload("res://Assets/Scripts/Shared/Time.gd")
 
 onready var animationPlayer = $AnimationPlayer
 
@@ -14,13 +15,11 @@ const MOTION_SMOOTHNESS = .9
 var motion : Vector2 = Vector2()
 var moving = true
 var step = 0
-var last_moving_time = 0
+var last_moving_time = -1
 
 # Player hurting values
 const CRAB_IDLE_DAMAGE = .5;
-const DAMAGE_COOLDOWN = 1;
 var players = []
-var last_damage_check = 0;
 
 # Movement patterns 
 const pattern = [
@@ -71,14 +70,14 @@ func move():
 	if !moving:
 		return
 			
-	var time = current_time()
+	var time = Time.current()
 	
 	if(is_fist_time_moving()):
-		last_moving_time = current_time()
+		last_moving_time = Time.current()
 	
 	if(move_time_has_passed(time)):
 		step += 1
-		last_moving_time = current_time()
+		last_moving_time = Time.current()
 		
 		if(pattern.size() <= step):
 			step = 0
@@ -104,18 +103,14 @@ func move():
 ## Get if it is the first time moving
 func is_fist_time_moving():
 	return last_moving_time == -1
-
-## Get current time
-func current_time():
-	return OS.get_system_time_msecs()
 	
 ## Get if the moving time has passed
 func move_time_has_passed(time):
 	return time - last_moving_time > MOVE_TIME * 1000
-	
+
 ## Check if damage has to be done to colliding players
 func check_damage():
 	
 	for player in players:
 		player.take_damage(CRAB_IDLE_DAMAGE)
-	
+
