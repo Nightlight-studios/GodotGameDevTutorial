@@ -4,6 +4,8 @@ onready var heart1 = $Heart1
 onready var heart2 = $Heart2
 onready var heart3 = $Heart3
 onready var coinLabel = $Label
+onready var dialogueBox = $DialogeBox
+onready var dialogueLabel = $DialogeBox/DialogueLabel
 
 func _ready():
 	coinLabel.text = String("%04d" % 0);
@@ -49,4 +51,10 @@ func setHearts(hearts = 0):
 
 func setCoins(coins):
 	coinLabel.text = String("%04d" % coins);
+	
+func setDialogue(text):
+	dialogueBox.show()
+	dialogueLabel.text = text;
+	
+
 	

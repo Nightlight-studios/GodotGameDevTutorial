@@ -6,6 +6,7 @@ const Time = preload("res://Assets/Scripts/Shared/Time.gd")
 
 onready var animationPlayer = $AnimationPlayer
 onready var sprite = $Sprite
+onready var hurtbox = $AttackBox/CollisionShape2D
 
 # Move variables
 export var moveSpeed = 500
@@ -26,6 +27,9 @@ var last_damage_time = -1
 export var player_attack_power = 1;
 var attackable_enemies = []
 
+## Player interact
+var interactable_objects = []
+
 # UI
 var ui = null
 const TILESET_WIDTH = 4
@@ -42,6 +46,7 @@ func _physics_process(_delta):
 		var _ok = get_tree().reload_current_scene()
 	
 	move()
+	interact()
 	attack()
 
 ## Move The player
@@ -61,24 +66,28 @@ func move():
 	if Input.is_action_pressed(Controls.RIGHT):
 		motion.x = lerp(motion.x,moveSpeed, MOVEMENT_SMOOTHNESS)
 		animationPlayer.play("Right")
+		hurtbox.position = Vector2(70,0)
 		direction = Direction.RIGHT
  
 	## Left movement
 	elif Input.is_action_pressed(Controls.LEFT):
 		motion.x = -lerp(motion.x,moveSpeed, MOVEMENT_SMOOTHNESS)
 		animationPlayer.play("Left")
+		hurtbox.position = Vector2(-70,0)
 		direction = Direction.LEFT
 
 	## Up movement
 	elif Input.is_action_pressed(Controls.UP):
 		motion.y = -lerp(motion.y,moveSpeed, MOVEMENT_SMOOTHNESS)
 		animationPlayer.play("Up")
+		hurtbox.position = Vector2(0,-100)
 		direction = Direction.UP
  
 	## Down movement
 	elif Input.is_action_pressed(Controls.DOWN):
 		motion.y = lerp(motion.y,moveSpeed, MOVEMENT_SMOOTHNESS)
 		animationPlayer.play("Down")
+		hurtbox.position = Vector2(0,100)
 		direction = Direction.DOWN		
 	
 	motion = move_and_slide(motion, Vector2(0,0), false, 4, PI/4 ,false)
@@ -101,6 +110,10 @@ func attack():
 			
 	if Input.is_action_just_released("ui_accept"):
 		reset_to_idle()
+
+func interact():
+	if Input.is_action_just_pressed("ui_accept") && !interactable_objects.empty():
+		interactable_objects[0].interact()
 
 ## Take damage
 func take_damage(damage):	
@@ -149,8 +162,16 @@ func reset_to_idle():
 func _on_AttackBox_body_entered(body):
 	if body.name == "Crab":
 		attackable_enemies.append(body)
+		
+	if body.is_in_group("Interactable"):
+		body.showInteractIcon()
+		interactable_objects.append(body)
 
 
 func _on_AttackBox_body_exited(body):
 	if body.name == "Crab":
 		attackable_enemies.remove(attackable_enemies.find(body))
+
+	if body.is_in_group("Interactable"):
+		body.hideInteractIcon()
+		interactable_objects.remove(interactable_objects.find(body))

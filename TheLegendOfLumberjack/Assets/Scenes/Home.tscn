@@ -1,15 +1,13 @@
-[gd_scene load_steps=28 format=2]
+[gd_scene load_steps=25 format=2]
 
 [ext_resource path="res://Assets/Sprites/Tiles/Overworld.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Sprites/Tiles/Mountains.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Nodes/Player.tscn" type="PackedScene" id=3]
 [ext_resource path="res://Assets/Nodes/Crab.tscn" type="PackedScene" id=4]
 [ext_resource path="res://Assets/Sprites/Tiles/Stairs.png" type="Texture" id=5]
-[ext_resource path="res://Assets/Sprites/Items/heart.png" type="Texture" id=6]
-[ext_resource path="res://Assets/Scripts/Shared/UI.gd" type="Script" id=7]
+[ext_resource path="res://Assets/Nodes/UI.tscn" type="PackedScene" id=6]
+[ext_resource path="res://Assets/Nodes/Girl.tscn" type="PackedScene" id=7]
 [ext_resource path="res://Assets/Nodes/Coin.tscn" type="PackedScene" id=8]
-[ext_resource path="res://Assets/Sprites/Descorations/CoinCounter.png" type="Texture" id=9]
-[ext_resource path="res://Assets/Fonts/IndieFlowwe.tres" type="DynamicFont" id=10]
 
 [sub_resource type="ConvexPolygonShape2D" id=5]
 points = PoolVector2Array( 0, 56.0809, 100, 56.0809, 100, 100, 0, 100 )
@@ -695,9 +693,6 @@ points = PoolVector2Array( 0, 0, 100, 0, 100, 100, 0, 100 )
 37/shapes = [  ]
 37/z_index = 0
 
-[sub_resource type="Theme" id=17]
-default_font = ExtResource( 10 )
-
 [node name="Home" type="Node2D"]
 position = Vector2( 1304, -1802 )
 
@@ -767,53 +762,18 @@ scale = Vector2( 0.75, 0.75 )
 position = Vector2( 1356, -2499 )
 scale = Vector2( 0.75, 0.75 )
 
-[node name="Player" parent="." instance=ExtResource( 3 )]
-position = Vector2( 470, 390 )
-scale = Vector2( 1.5, 1.5 )
+[node name="Girl" parent="." instance=ExtResource( 7 )]
+position = Vector2( 504, -919 )
+scale = Vector2( 1.25, 1.25 )
 
-[node name="Camera2D" type="Camera2D" parent="Player"]
-position = Vector2( 0, 1 )
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2( 503, -669.5 )
+scale = Vector2( 1.5, 1.5 )
 current = true
 zoom = Vector2( 1.25, 1.25 )
 
-[node name="UI" type="CanvasLayer" parent="."]
-script = ExtResource( 7 )
+[node name="Player" parent="." instance=ExtResource( 3 )]
+position = Vector2( 520, -615 )
+scale = Vector2( 1.5, 1.5 )
 
-[node name="CoinCounter" type="Sprite" parent="UI"]
-position = Vector2( 1086, 101 )
-texture = ExtResource( 9 )
-
-[node name="Heart1" type="Sprite" parent="UI"]
-position = Vector2( 114, 81 )
-scale = Vector2( 0.68, 0.68 )
-texture = ExtResource( 6 )
-offset = Vector2( -27.9411, -4.41174 )
-hframes = 4
-
-[node name="Heart2" type="Sprite" parent="UI"]
-position = Vector2( 188, 81 )
-scale = Vector2( 0.68, 0.68 )
-texture = ExtResource( 6 )
-offset = Vector2( -27.9411, -4.41174 )
-hframes = 4
-
-[node name="Heart3" type="Sprite" parent="UI"]
-position = Vector2( 261, 81 )
-scale = Vector2( 0.68, 0.68 )
-texture = ExtResource( 6 )
-offset = Vector2( -27.9411, -4.41174 )
-hframes = 4
-
-[node name="Label" type="Label" parent="UI"]
-anchor_left = 0.815
-anchor_top = 0.104
-anchor_right = 0.934
-anchor_bottom = 0.2
-margin_left = 6.79993
-margin_top = -28.88
-margin_right = 70.48
-margin_bottom = 63.0
-rect_scale = Vector2( 0.75, 0.75 )
-theme = SubResource( 17 )
-custom_colors/font_color = Color( 0.854902, 0.662745, 0, 1 )
-text = "0000"
+[node name="UI" parent="." instance=ExtResource( 6 )]

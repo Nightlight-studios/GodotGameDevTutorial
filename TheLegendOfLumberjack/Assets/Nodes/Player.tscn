@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=2]
+[gd_scene load_steps=12 format=2]
 
 [ext_resource path="res://Assets/Sprites/Player/Player.png" type="Texture" id=1]
 [ext_resource path="res://Assets/Scripts/Player/PlayerController.gd" type="Script" id=2]
+[ext_resource path="res://Assets/Sprites/Tiles/Overworld.png" type="Texture" id=3]
 
 [sub_resource type="CircleShape2D" id=8]
-radius = 86.0523
+radius = 41.0122
 
 [sub_resource type="RectangleShape2D" id=1]
 extents = Vector2( 43, 47.5 )
@@ -170,9 +171,15 @@ script = ExtResource( 2 )
 [node name="AttackBox" type="Area2D" parent="."]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="AttackBox"]
-modulate = Color( 0.419608, 0.160784, 0.160784, 0.462745 )
 show_behind_parent = true
+position = Vector2( 0, 100 )
 shape = SubResource( 8 )
+
+[node name="Sprite" type="Sprite" parent="AttackBox/CollisionShape2D"]
+visible = false
+position = Vector2( 1.43051e-06, 0.500001 )
+scale = Vector2( 0.166667, 0.126 )
+texture = ExtResource( 3 )
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 modulate = Color( 0, 1, 0.486275, 1 )
