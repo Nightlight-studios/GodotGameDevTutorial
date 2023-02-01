@@ -26,20 +26,21 @@ jobs:
           mkdir -v -p build/windows
           cd $PROJECT_PATH
           godot -v --export "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+      - name: Create a Release of commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ github.token }}
+          automatic_release_tag: windows-latest
+          prerelease: false
+          title: The Legend of lumberjack - windows
+          files: |
+             TheLegendOfLumberjack/../build/windows/TheLegendOfLumberjack.exe
+             
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
           name: windows
           path: build/windows
-      - name: Create a Release of commit
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: ${{ github.token }}
-          automatic_release_tag: latest
-          prerelease: false
-          title: The Legend of lumberjack - windows
-          files: |
-             $PROJECT_PATH/../build/windows/$EXPORT_NAME.exe
 
   export-linux:
     name: Linux Export
@@ -70,7 +71,7 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ github.token }}
-          automatic_release_tag: latest
+          automatic_release_tag: linux-latest
           prerelease: false
           title: The Legend of lumberjack - linux
           files: |
@@ -112,7 +113,7 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ github.token }}
-          automatic_release_tag: latest
+          automatic_release_tag: web-latest
           prerelease: false
           title: The Legend of lumberjack - web
           files: |
@@ -146,7 +147,7 @@ jobs:
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ github.token }}
-          automatic_release_tag: latest
+          automatic_release_tag: mac-latest
           prerelease: false
           title: The Legend of lumberjack - mac
           files: |
