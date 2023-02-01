@@ -31,6 +31,15 @@ jobs:
         with:
           name: windows
           path: build/windows
+      - name: Create a Release of commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ github.token }}
+          automatic_release_tag: latest
+          prerelease: false
+          title: The Legend of lumberjack - windows
+          files: |
+             $PROJECT_PATH/../build/windows/$EXPORT_NAME.exe
 
   export-linux:
     name: Linux Export
@@ -56,6 +65,16 @@ jobs:
         with:
           name: linux
           path: build/linux
+          
+      - name: Create a Release of commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ github.token }}
+          automatic_release_tag: latest
+          prerelease: false
+          title: The Legend of lumberjack - linux
+          files: |
+             $PROJECT_PATH/../build/linux/$EXPORT_NAME.x86_64
 
   export-web:
     name: Web Export
@@ -89,6 +108,15 @@ jobs:
         with:
           branch: gh-pages # The branch the action should deploy to.
           folder: build/web # The folder the action should deploy.
+      - name: Create a Release of commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ github.token }}
+          automatic_release_tag: latest
+          prerelease: false
+          title: The Legend of lumberjack - web
+          files: |
+             $PROJECT_PATH/../build/web/index.html
 
   export-mac:
     name: Mac Export
@@ -114,20 +142,14 @@ jobs:
         with:
           name: mac
           path: build/mac
-          
-  create-binaries:
-    runs-on: ubuntu-18.04
-    steps:
       - name: Create a Release of commit
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
           repo_token: ${{ github.token }}
           automatic_release_tag: latest
           prerelease: false
-          title: The Legend of lumberjack $(date)
+          title: The Legend of lumberjack - mac
           files: |
-             $PROJECT_PATH/../build/windows/$EXPORT_NAME.exe
-             $PROJECT_PATH/../build/linux/$EXPORT_NAME.x86_64
-             $PROJECT_PATH/../build/web/index.html
              $PROJECT_PATH/../build/mac/$EXPORT_NAME.zip
-             
+          
+
