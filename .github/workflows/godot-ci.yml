@@ -114,3 +114,20 @@ jobs:
         with:
           name: mac
           path: build/mac
+          
+  create-binaries:
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Create a Release of commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ github.token }}
+          automatic_release_tag: latest
+          prerelease: false
+          title: The Legend of lumberjack $(date)
+          files: |
+             $PROJECT_PATH/../build/windows/$EXPORT_NAME.exe
+             $PROJECT_PATH/../build/linux/$EXPORT_NAME.x86_64
+             $PROJECT_PATH/../build/web/index.html
+             $PROJECT_PATH/../build/mac/$EXPORT_NAME.zip
+             
