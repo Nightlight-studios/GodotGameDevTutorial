@@ -25,7 +25,7 @@ jobs:
         run: |
           mkdir -v -p build/windows
           cd $PROJECT_PATH
-          godot -v --export "Windows Desktop" ../build/windows/$EXPORT_NAME.exe
+          godot -v --export "Windows Desktop" ./build/windows/$EXPORT_NAME.exe
       - name: Create a Release of commit
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -34,7 +34,7 @@ jobs:
           prerelease: false
           title: The Legend of lumberjack - windows
           files: |
-             TheLegendOfLumberjack/../build/windows/TheLegendOfLumberjack.exe
+             TheLegendOfLumberjack/build/windows/TheLegendOfLumberjack.exe
              
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
@@ -60,13 +60,7 @@ jobs:
         run: |
           mkdir -v -p build/linux
           cd $PROJECT_PATH
-          godot -v --export "Linux/X11" ../build/linux/$EXPORT_NAME.x86_64
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: linux
-          path: build/linux
-          
+          godot -v --export "Linux/X11" ./build/linux/$EXPORT_NAME.x86_64
       - name: Create a Release of commit
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -75,7 +69,12 @@ jobs:
           prerelease: false
           title: The Legend of lumberjack - linux
           files: |
-             $PROJECT_PATH/../build/linux/$EXPORT_NAME.x86_64
+             $PROJECT_PATH/build/linux/$EXPORT_NAME.x86_64
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: linux
+          path: build/linux
 
   export-web:
     name: Web Export
@@ -96,6 +95,15 @@ jobs:
           mkdir -v -p build/web
           cd $PROJECT_PATH
           godot -v --export "HTML5" ../build/web/index.html
+      - name: Create a Release of commit
+        uses: "marvinpinto/action-automatic-releases@latest"
+        with:
+          repo_token: ${{ github.token }}
+          automatic_release_tag: web-latest
+          prerelease: false
+          title: The Legend of lumberjack - web
+          files: |
+             $PROJECT_PATH/build/web/index.html
       - name: Upload Artifact
         uses: actions/upload-artifact@v1
         with:
@@ -108,16 +116,7 @@ jobs:
         uses: JamesIves/github-pages-deploy-action@releases/v4
         with:
           branch: gh-pages # The branch the action should deploy to.
-          folder: build/web # The folder the action should deploy.
-      - name: Create a Release of commit
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: ${{ github.token }}
-          automatic_release_tag: web-latest
-          prerelease: false
-          title: The Legend of lumberjack - web
-          files: |
-             $PROJECT_PATH/../build/web/index.html
+          folder: $PROJECT_PATH/build/web # The folder the action should deploy.
 
   export-mac:
     name: Mac Export
@@ -137,12 +136,7 @@ jobs:
         run: |
           mkdir -v -p build/mac
           cd $PROJECT_PATH
-          godot -v --export "Mac OSX" ../build/mac/$EXPORT_NAME.zip
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: mac
-          path: build/mac
+          godot -v --export "Mac OSX" ./build/mac/$EXPORT_NAME.zip      
       - name: Create a Release of commit
         uses: "marvinpinto/action-automatic-releases@latest"
         with:
@@ -151,6 +145,11 @@ jobs:
           prerelease: false
           title: The Legend of lumberjack - mac
           files: |
-             $PROJECT_PATH/../build/mac/$EXPORT_NAME.zip
+             $PROJECT_PATH/build/mac/$EXPORT_NAME.zip
+      - name: Upload Artifact
+        uses: actions/upload-artifact@v1
+        with:
+          name: mac
+          path: build/mac
           
 
