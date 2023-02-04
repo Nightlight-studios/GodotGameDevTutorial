@@ -86,15 +86,6 @@ jobs:
           mkdir -v -p $PROJECT_PATH/build/web
           cd $PROJECT_PATH
           godot -v --export "HTML5" ./build/web/index.html
-      - name: Create a Release of commit
-        uses: "marvinpinto/action-automatic-releases@latest"
-        with:
-          repo_token: ${{ github.token }}
-          automatic_release_tag: web-latest
-          prerelease: false
-          title: The Legend of lumberjack - web
-          files: |
-             TheLegendOfLumberjack/build/web/index.html
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
