@@ -94,7 +94,7 @@ jobs:
           prerelease: false
           title: The Legend of lumberjack - web
           files: |
-             $PROJECT_PATH/build/web/index.html
+             TheLegendOfLumberjack/build/web/index.html
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
