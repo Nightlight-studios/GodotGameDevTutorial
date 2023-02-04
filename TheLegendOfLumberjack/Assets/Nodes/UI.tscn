@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://Assets/Fonts/IndieFlowwe.tres" type="DynamicFont" id=1]
+[ext_resource path="res://Assets/Fonts/Inter.tres" type="DynamicFont" id=1]
 [ext_resource path="res://Assets/Sprites/Descorations/CoinCounter.png" type="Texture" id=2]
 [ext_resource path="res://Assets/Sprites/Items/heart.png" type="Texture" id=3]
 [ext_resource path="res://Assets/Sprites/Descorations/DialogeBox.png" type="Texture" id=4]
@@ -42,11 +42,11 @@ anchor_left = 0.815
 anchor_top = 0.104
 anchor_right = 0.934
 anchor_bottom = 0.2
-margin_left = 6.79993
-margin_top = -28.88
-margin_right = 70.48
-margin_bottom = 63.0
-rect_scale = Vector2( 0.75, 0.75 )
+margin_left = -6.19995
+margin_top = -6.88
+margin_right = 93.48
+margin_bottom = 48.0
+rect_scale = Vector2( 0.65, 0.65 )
 theme = SubResource( 1 )
 custom_colors/font_color = Color( 0.854902, 0.662745, 0, 1 )
 text = "0000"

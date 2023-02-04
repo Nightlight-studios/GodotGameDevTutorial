@@ -12,6 +12,8 @@ config_version=4
 
 config/name="TheLegendOfLumberJack"
 run/main_scene="res://Assets/Scenes/StartMenu.tscn"
+boot_splash/image="res://splashscreen.png"
+boot_splash/fullsize=false
 config/icon="res://icon.png"
 
 [display]

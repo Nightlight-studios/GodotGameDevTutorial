@@ -1,0 +1,33 @@
+[gd_scene load_steps=4 format=2]
+
+[ext_resource path="res://Assets/Sprites/Descorations/logo.png" type="Texture" id=1]
+[ext_resource path="res://Assets/Fonts/Inter.tres" type="DynamicFont" id=2]
+
+[sub_resource type="Theme" id=1]
+default_font = ExtResource( 2 )
+
+[node name="ErrorDebug" type="Node2D"]
+
+[node name="Label" type="Label" parent="."]
+margin_left = 49.0
+margin_top = 190.0
+margin_right = 2009.0
+margin_bottom = 515.0
+rect_scale = Vector2( 0.25, 0.25 )
+theme = SubResource( 1 )
+text = "An Error has occurred during the gameplay
+We're sorry :("
+
+[node name="ErrorTrace" type="Label" parent="."]
+margin_left = 54.0
+margin_top = 272.0
+margin_right = 2014.0
+margin_bottom = 597.0
+rect_scale = Vector2( 0.25, 0.25 )
+theme = SubResource( 1 )
+text = "..."
+
+[node name="Logo" type="Sprite" parent="."]
+position = Vector2( 359, 111 )
+scale = Vector2( 0.35, 0.35 )
+texture = ExtResource( 1 )

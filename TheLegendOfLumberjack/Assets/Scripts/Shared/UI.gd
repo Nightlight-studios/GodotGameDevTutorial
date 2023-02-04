@@ -56,5 +56,9 @@ func setDialogue(text):
 	dialogueBox.show()
 	dialogueLabel.text = text;
 	
+func hideDialogue():
+	dialogueBox.hide()
+	dialogueLabel.text = "";
+	
 
 	

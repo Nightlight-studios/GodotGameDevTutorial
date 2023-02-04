@@ -217,7 +217,7 @@
 14/shapes = [  ]
 14/z_index = 0
 
-[node name="TileMap" type="TileMap"]
+[node name="StartMenu" type="TileMap"]
 tile_set = SubResource( 1 )
 cell_size = Vector2( 100, 100 )
 format = 1

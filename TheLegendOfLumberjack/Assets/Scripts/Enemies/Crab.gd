@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
-const Controls = preload("res://Assets/Scripts/Mechanics/Controls.gd")
-const Direction = preload("res://Assets/Scripts/Mechanics/Direction.gd")
-const Time = preload("res://Assets/Scripts/Shared/Time.gd")
+const Constants = preload("res://Assets/Scripts/Shared/Constants.gd")
+
+const Controls = Constants.CONTROLS_SCRIPT
+const Direction = Constants.DIRECTION_SCRIPT
+const Time = Constants.TIME_SCRIPT
 
 onready var animationPlayer = $AnimationPlayer
 

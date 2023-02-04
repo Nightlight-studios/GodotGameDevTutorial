@@ -1,8 +1,10 @@
 extends KinematicBody2D
 
-const Controls = preload("res://Assets/Scripts/Mechanics/Controls.gd")
-const Direction = preload("res://Assets/Scripts/Mechanics/Direction.gd")
-const Time = preload("res://Assets/Scripts/Shared/Time.gd")
+const Constants = preload("res://Assets/Scripts/Shared/Constants.gd")
+
+const Controls = Constants.CONTROLS_SCRIPT
+const Direction = Constants.DIRECTION_SCRIPT
+const Time = Constants.TIME_SCRIPT
 
 onready var animationPlayer = $AnimationPlayer
 onready var sprite = $Sprite
@@ -13,6 +15,7 @@ export var moveSpeed = 500
 export var motion : Vector2 = Vector2()
 export var direction : int = Direction.DOWN
 const MOVEMENT_SMOOTHNESS = .9
+var canMove;
 
 # Player stats
 const MAX_LIFE = 3
@@ -37,6 +40,7 @@ const TILESET_WIDTH = 4
 ## Code that executes when the player is ready
 func _ready():
 	ui = get_tree().get_root().find_node("UI", true, false)
+	canMove = true;
 
 ## Code that executes once per update (60 times per second)
 func _physics_process(_delta):
@@ -45,12 +49,14 @@ func _physics_process(_delta):
 	if Input.is_action_pressed(Controls.RESET_LEVEL):
 		var _ok = get_tree().reload_current_scene()
 	
-	move()
-	interact()
-	attack()
+	check_interaction()
+	
+	if canMove:
+		check_movement()
+		check_attack()
 
 ## Move The player
-func move():
+func check_movement():
 	motion = Vector2()
 	
 	var is_movement_just_released = Input.is_action_just_released(Controls.RIGHT) || Input.is_action_just_released(Controls.LEFT) || Input.is_action_just_released(Controls.UP) || Input.is_action_just_released(Controls.DOWN)
@@ -93,7 +99,7 @@ func move():
 	motion = move_and_slide(motion, Vector2(0,0), false, 4, PI/4 ,false)
 
 ## Attack with player
-func attack():
+func check_attack():
 	if Input.is_action_just_pressed("ui_accept"):
 		match direction:
 			Direction.DOWN:
@@ -111,9 +117,12 @@ func attack():
 	if Input.is_action_just_released("ui_accept"):
 		reset_to_idle()
 
-func interact():
+func check_interaction():
 	if Input.is_action_just_pressed("ui_accept") && !interactable_objects.empty():
-		interactable_objects[0].interact()
+		
+		var object = interactable_objects[0]
+		if object.has_method("interact"):
+			object.interact(self)
 
 ## Take damage
 func take_damage(damage):	
@@ -123,6 +132,7 @@ func take_damage(damage):
 		return
 	
 	## Damage the player
+	animationPlayer.play("Hurt")
 	life = life - damage
 	ui.setHearts(life)
 	last_damage_time = Time.current()
@@ -138,7 +148,6 @@ func damage_cooldown_has_passed():
 ## Add a coin to coin counter
 func add_coin():
 	coins += 1
-	print("coin added")
 	ui.setCoins(coins)
 
 ## Reset to Idle frame  
@@ -159,6 +168,12 @@ func reset_to_idle():
 			if sprite.scale.x < 0:
 				sprite.scale.x = -sprite.scale.x 
 
+func setMovementOn():
+	canMove = true
+
+func setMovementOff():
+	canMove = false
+
 func _on_AttackBox_body_entered(body):
 	if body.name == "Crab":
 		attackable_enemies.append(body)
@@ -166,7 +181,6 @@ func _on_AttackBox_body_entered(body):
 	if body.is_in_group("Interactable"):
 		body.showInteractIcon()
 		interactable_objects.append(body)
-
 
 func _on_AttackBox_body_exited(body):
 	if body.name == "Crab":

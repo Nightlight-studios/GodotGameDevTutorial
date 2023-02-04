@@ -1,7 +1,7 @@
 extends Node2D
 
 onready var camera = $Camera2D
-
+const Constants = preload("res://Assets/Scripts/Shared/Constants.gd")
 
 func _physics_process(delta):
 	
@@ -13,5 +13,5 @@ func _physics_process(delta):
 	
 	
 	if(Input.is_action_pressed("ui_accept")):
-		var _ok = get_tree().change_scene("res://Assets/Scenes/StartMenu.tscn")
+		var _ok = get_tree().change_scene(Constants.START_MENU)
 	
