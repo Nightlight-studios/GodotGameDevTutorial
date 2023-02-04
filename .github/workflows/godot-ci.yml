@@ -36,12 +36,6 @@ jobs:
           files: |
              TheLegendOfLumberjack/build/windows/TheLegendOfLumberjack.exe
              
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: windows
-          path: build/windows
-
   export-linux:
     name: Linux Export
     runs-on: ubuntu-20.04
@@ -70,11 +64,6 @@ jobs:
           title: The Legend of lumberjack - linux
           files: |
              $PROJECT_PATH/build/linux/$EXPORT_NAME.x86_64
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: linux
-          path: build/linux
 
   export-web:
     name: Web Export
@@ -104,11 +93,6 @@ jobs:
           title: The Legend of lumberjack - web
           files: |
              $PROJECT_PATH/build/web/index.html
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: web
-          path: build/web
       - name: Install rsync 📚
         run: |
           apt-get update && apt-get install -y rsync
@@ -146,10 +130,5 @@ jobs:
           title: The Legend of lumberjack - mac
           files: |
              $PROJECT_PATH/build/mac/$EXPORT_NAME.zip
-      - name: Upload Artifact
-        uses: actions/upload-artifact@v1
-        with:
-          name: mac
-          path: build/mac
           
 
